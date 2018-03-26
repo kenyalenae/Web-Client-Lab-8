@@ -1,0 +1,44 @@
+<h2>Tasks To Do</h2>
+
+<div class="add-task">
+    <form id="add-task-form" action="/add" method="POST">
+        <input id="add-task-text" name="text" placeholder="todo task">
+        <input id="add-task-button" name="add" type="submit" value="add">
+    </form>
+</div>
+
+<div class="task-list">
+
+    {{#if tasks}}
+        <ol>
+            {{#each tasks}}
+                <li><a href="task/{{this._id}}">{{this.text}}</a></li>
+                <form class="done-form" action="/done" method="POST">
+                    <input class="done-button" type="submit" name="done" value="Done!">
+                    <input type="hidden" name="_id" value="{{this._id}}">
+                </form>
+
+                <form class="delete-form" action="/delete" method="POST">
+                    <input class="delete-button" type="submit" name="delete" value="Delete">
+                    <input type="hidden" name="_id" value="{{this._id}}">
+                </form>
+
+            {{/each}}
+        </ol>
+
+    {{else}}
+        <p>No tasks to do!</p>
+    {{/if}}
+
+</div>
+
+{{#if tasks}}
+    <div class="all-done">
+        <form action="/alldone" method="POST">
+            <input class="all-done-button" type="submit" value="All done!">
+        </form>
+    </div>
+{{/if}}
+
+<script src="/javascripts/confirm_delete.js"></script>
+
