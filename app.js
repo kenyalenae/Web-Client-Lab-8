@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 
 // read the mLab connection URL
 var db_url = process.env.MONGO_URL;
+console.log(db_url);
 // and connect to the database. Print success or error message.
 mongoose.connect(db_url)
     .then( () => { console.log('Connected to mLab'); })
