@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.error-message {
+  color: red;
+}
+
+.info-message {
+  color: green;
+}

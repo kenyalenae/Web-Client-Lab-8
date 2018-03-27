@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var flash = require('express-flash');
+var session = require('express-session');
 var mongoose = require('mongoose');
 
 // read the mLab connection URL
@@ -28,6 +30,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({secret: 'top secret', resave: false, saveUninitialized:false}));
+app.use(flash());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
@@ -43,6 +49,12 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+
+  if (err.kind === 'ObjectId' && err.name == 'CastError') {
+    err.status = 404;
+    err.message = "ObjectId Not Found";
+  }
+
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

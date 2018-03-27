@@ -1,13 +1,13 @@
 // Find the "Delete completed tasks" button
-var deleteCompleted = document.querySelectorAll('.delete-done-button');
+var deleteButtons = document.querySelectorAll('.delete-button');
 
 // when the user clicks the "Delete completed tasks" button, create message to say "are you sure"
-deleteCompleted.forEach(function(button){
+deleteButtons.forEach(function(button){
 
     button.addEventListener('click', function(ev){
 
         // show the confirm message
-        var okToDelete = confirm("Are you sure?");
+        var okToDelete = confirm("Delete task - Are you sure?");
 
         // if user presses no, this will prevent form from submitting
         if (!okToDelete) {
@@ -15,3 +15,4 @@ deleteCompleted.forEach(function(button){
         }
     })
 });
+
